@@ -1,0 +1,8 @@
+findspark==1.4.2
+kafka-python==2.0.2
+py4j==0.10.7
+pyspark==2.4.6
+TwitterAPI==2.6.2.1
+konlpy==0.5.2
+apscheduler==3.6.3
+kazoo==2.8.0

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .parent, .row {
+    width: 100%;
+    margin: 10px auto;
+    display: inline-block;
+    background-color: ivory;
+  }
+
+  .columns {
+    color: coral;
+  }
+
+  .first {
+    float: left;
+    width: 35%;
+    margin: 10px auto;
+  }
+
+  .second{
+    float: left;
+    margin-left: 5%;
+    width: 30%;
+    margin: 10px auto;
+  }
+
+  .third{
+    float: left;
+    width: 35%;
+    margin: 10px auto;
+  }
+</style>
+
+<section>
+  <div class="parent">
+    <center>
+      <div class="columns">
+        <h5 class="first label"> user_id </h5>
+        <h5 class="second label"> user_grade </h5>
+        <h5 class="third label"> Option </h5>
+      </div>
+      {% for user in users %}
+      <div class="row">
+        <div class="first">{{ user.user_id }}</div>
+        <div class="second">{{ user.grade }}</div>
+        <div class="third">
+          {% if cur_user == user.user_id %}
+          <b> YOU </b>
+          {% else %}
+          <button type="submit" value="{{ user.user_id }}" class='btn-edit'> Edit </button>
+          <button type="submit" value="{{ user.user_id }}" class="btn-del"> Delete </button>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </center>
+  </div>
+</section>
+<script>
+  $('.btn-edit').on('click', function(){
+    $.ajax({
+          type: 'POST',
+          url: '/user-edit',
+          dataType: 'HTML',
+          data: {'user_id': $(this).val()},
+          success: function(response){
+             window.location = "{{ url_for('user_list') }}";
+             return response;
+          },
+          error: function(request, status, error){
+             alert('ajax 통신 실패[5]');
+             alert(error);
+          }
+      });
+  })
+  $('#btn-del').submit(function(){
+    $.ajax({
+          type: 'POST',
+          url: '/user-delete',
+          dataType: 'HTML',
+          success: function(response){
+             window.location = "{{ url_for('user_list') }}";
+             return response;
+          },
+          error: function(request, status, error){
+             alert('ajax 통신 실패[5]');
+             alert(error);
+          }
+      });
+  })
+</script>
+{% endblock %}

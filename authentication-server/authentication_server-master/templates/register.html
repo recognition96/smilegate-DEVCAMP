@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+{% if data %}
+    <p>이미 로그인 상태입니다.</p>
+{% else %}
+<div class="container">
+    <div class="mt-5">
+        <h1>회원가입</h1>
+    </div>
+    <div class="col-6">
+        <form method="POST" class="auth form">
+            <label for="email"><b>Email Authentication</b></label>
+            <input type="text" placeholder="Email" name="email" id="email" required>
+            <button type="submit" class="authbtn">Authentication</button>
+        </form>
+
+        <hr>
+        <form method="POST" class="register form" id="reg-form" onsubmit="return validateFunc()">
+            <label for="id"><b>ID</b></label>
+            <input type="text" placeholder="ID" name="id" id="id" required>
+
+            <label for="pswd"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="pswd" id="pswd" required>
+
+            <label for="pswd-repeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="pswd-repeat" id="pswd-repeat" required>
+
+            <button type="submit" class="registerbtn"> Register </button>
+            {% if error %}
+            <span style="color: red; margin: 0 10px 0;"><strong> {{ error }}</strong></span>
+            {% endif %}
+            <hr>
+            <div class="container login">
+                Already have an account? <a href="{{ url_for('login') }}">Log in</a>.
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function validateFunc(){
+        var form = document.reg-form;
+        var pswd = document.getElementById("pswd").value;
+        var pswd_repeat = document.getElementById("pswd-repeat").value;
+
+        if (pswd != pswd_repeat) {
+            alert("비밀번호가 일치하지 않습니다.")
+            form.pswd-repeat.select();
+            return false;
+        }
+    }
+</script>
+{% endif %}
+{% endblock %}

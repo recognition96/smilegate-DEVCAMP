@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if data %}
+    <center><div>
+        <h3>{{ data[0].user_id }}님 안녕하세요!</h3>
+        <br>
+           <form action="/logout" method="POST" id="logoutForm" onSubmit="return false;">
+               {% if data[0].grade == '0' %}
+               <button><a href="/user-list"> Users </a></button>
+               {% endif %}
+               <button type="submit"> Logout </button>
+           </form>
+        <br>
+    </div></center>
+{% else %}
+<center><div>
+    <p>로그인하지 않은 상태입니다. </p>
+    <p>서비스를 이용하려면 로그인해주세요.</p>
+    <button><a href="/login"> Login </a></button>
+    <button><a href="/register"> Register </a></button>
+</div></center>
+{% endif %}
+<script>
+$('#logoutForm').submit(function(){
+    $.ajax({
+          type: 'GET',
+          url: $('#logoutForm').attr('action'),
+          dataType: 'JSON',
+          success: function(response){
+             window.location = "{{ url_for('index') }}";
+             return response;
+          },
+          error: function(request, status, error){
+             alert('ajax 통신 실패[4]');
+             alert(error);
+          }
+    });
+})
+</script>
+{% endblock %}

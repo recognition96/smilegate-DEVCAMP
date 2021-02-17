@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+</style>
+<p>
+    <div>
+        <center>
+            <h1>SGS Dev camp</h1>
+            <hr width="100%" color="black"/>
+        </center>
+        {% block content %}
+        {% set cur_user = data[0].user_id %}
+        {% endblock %}
+        <hr width="100%" color="black"/>
+    </div>
+    <p>
+        <center>
+            <a href="/" id="normal_home">HOME</a>
+        </center>
+    </p>
+    <hr>
+</body>
+</html>

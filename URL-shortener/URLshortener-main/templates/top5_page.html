@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+  .parent {
+    width: 90%;
+    margin: 10px auto;
+    background-color: ivory;
+  }
+
+  .columns {
+    color: coral;
+  }
+
+  .first {
+    float: left;
+    width:30%;
+    margin: 10px auto;
+  }
+
+  .second{
+    float: left;
+    margin-left: 5%;
+    width:30%;
+    margin: 10px auto;
+  }
+
+  .third{
+    float: right;
+    width:30%;
+    margin: 10px auto;
+  }
+</style>
+
+<section>
+  <div class="parent">
+    <div class="columns">
+      <h5 class="first label"> COUNT </h5>
+      <h5 class="second label"> URL </h5>
+      <h5 class="third label"> LAST INPUT TIME </h5>
+    </div>
+    {% for url in urls %}
+    <div class="first">{{ url.count }}</div>
+    <div class="second">{{ url.origin }}</div>
+    <div class="third">{{ url.last_input_time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

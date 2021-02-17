@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Shortener</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+    body {
+      text-align: center;
+      margin: 100px;
+    }
+    .container {
+      padding: 0px 0px 50px;
+    }
+    .btn-lg {
+      margin: 0 10px 0;
+    }
+    .result_str {
+      margin: 30px 0 0;
+      font-size: x-large;
+      color: red;
+    }
+    .nav-link {
+      font-size: large;
+      color: black;
+    }
+    .nav-item {
+      margin: 3px;
+    }
+  </style>
+  <body>
+    <ul class="nav justify-content-end">
+      <li class="nav-item bg-warning">
+        <a class="nav-link font-weight-bold" href="{{ url_for('index') }}"> HOME </a>
+      </li>
+      <li class="nav-item bg-warning">
+        <a class="nav-link font-weight-bold" href="{{ url_for('show_freq_urls') }}">top5 URLs</a>
+      </li>
+    </ul>
+    <div class="container">
+      <h1>Shorten Your URL</h1>
+      <img src="static/url_shortener.jpg" class="img-rounded" alt="url_shortener" width="400" height="300" padding="10px">
+    </div>
+    {% block content %}
+    {% endblock %}
+  </body>
+  <script>
+  function copyURL(elementID) {
+    var element = document.getElementById(elementID); //select the element
+    var elementText = element.textContent; //get the text content from the element
+    navigator.clipboard.writeText(elementText);
+    alert("Copied the link on clipboard:  " + elementText)
+  }
+  </script>
+</html>

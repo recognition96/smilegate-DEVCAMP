@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<section>
+  <form class="form-inline justify-content-center" action="/" method="POST">
+    <div class="input-group form-group w-50">
+      <input type="text" class="form-control form-control-lg" name="input_url" placeholder="http://ekp.smilegate.net/">
+      <button type="submit" class="btn-lg btn-primary">Shorten!</button>
+    </div>
+  </form>
+  <div class="result">
+    {% if short_url %}
+    {% set url_code = short_url.split('/')[1] %}
+    <div>
+      <p class="result_str">
+        <a href="{{ url_code }}" id="short_url">{{short_url}}</a>
+        <button class="btn-lg btn-green" onclick="copyURL('short_url')"> Copy! </button>
+      </p>
+    </div>
+    {% endif %}
+    {% if invalid_url %}
+    <div>
+      <p class="result_str">Invalid url. Please check input.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

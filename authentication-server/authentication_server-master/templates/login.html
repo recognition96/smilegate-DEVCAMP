@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+{% if data %}
+<p>이미 로그인 상태입니다.</p>
+{% else %}
+<center><div>
+    <h2>Login</h2>
+    <div class="col-4">
+        <form action="/login" method="POST" id="loginForm" onSubmit="return false;">
+          <input type="text" name="ID" placeholder="ID" id="user_id">
+          <input type="password" name="password" placeholder="Password" id="user_pswd">
+          <br><br>
+          <input type="submit" value="Login">
+        </form>
+        <br>
+    </div>
+</div></center>
+{% endif %}
+<script>
+$('#loginForm').submit(function(){
+    var id = $('#user_id').val();
+    var password = $('#user_pswd').val();
+    var postdata = {
+        'id':id, 'password':password
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: $('#loginForm').attr('action'),
+        data: JSON.stringify(postdata),
+        dataType : 'JSON',
+        contentType: "application/json",
+        success: function(response){
+            console.log(response)
+            if(response.login == true) {
+                <!-- 아이디/비밀번호 일치 -->
+                $.ajax({
+                      <!-- 유저 로그인 페이지 렌더링을 위한 요청-->
+                      type: 'POST',
+                      url: '/',
+                      data: JSON.stringify({ 'user_id': id }),
+                      dataType: 'HTML',
+                      contentType: "application/json",
+                      headers: { "Authorization": 'Bearer ' + response.token },  <!-- jwt 이용 포멧 -->
+                      success: function(response){
+                          window.location = "{{ url_for('index') }}";
+                      },
+                      error: function(request, status, error){
+                         alert('ajax 통신 실패[2]');
+                         alert(error);
+                      }
+                });
+            }
+            else if(response.login == false){
+                <!-- 아이디/비밀번호 불일치, 가입정보가 없음 -->
+                alert('가입정보가 없거나, 아이디와 비밀번호가 일치하지 않습니다.')
+                window.location = "{{ url_for('login') }}"
+            }
+            else {
+                <!-- 입력된 아이디가 없을 경우 -->
+                alert('아이디를 입력하십시오.');
+                window.location = "{{ url_for('login') }}";
+            }
+        },
+        error: function(request, status, error){
+            alert('ajax 통신 실패[1]');
+            alert(error);
+        }
+    })
+})
+</script>
+
+{% endblock %}
