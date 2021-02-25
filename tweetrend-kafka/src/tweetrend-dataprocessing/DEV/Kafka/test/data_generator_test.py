@@ -14,11 +14,11 @@ class DataGenerator:
         init_datetime = datetime.utcnow()
         self.init_hms = [init_datetime.hour, init_datetime.minute, init_datetime.second]
         self.daily_cnt = 0
-        self.producer = kafka_producer.Producer('10.250.93.16', '9093')
+        self.producer = kafka_producer.Producer('localhost', '9093')
         Log.i("DataGenerator on.")
 
     def load_data_from_broker(self):
-        consumer = kafka_consumer.Consumer('10.250.93.16', '9092', 'test')
+        consumer = kafka_consumer.Consumer('localhost', '9092', 'test')
         for origin_tweet in consumer.consumer:
             print(origin_tweet.value)
             self.make_days_random_data(origin_tweet.value)
