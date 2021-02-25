@@ -33,7 +33,7 @@ class Consumer:
 
 
 if __name__ == '__main__':
-    consumer = Consumer('test', '10.250.93.4', '9092')
+    consumer = Consumer('test')
     # consumer list를 가져온다
     print("[begin] get consumer list")
     start = time.time()
