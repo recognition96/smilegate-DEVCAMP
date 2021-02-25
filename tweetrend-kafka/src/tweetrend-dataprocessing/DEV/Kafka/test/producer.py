@@ -12,7 +12,7 @@ Kafka Producer Option
  - value_serializer(default=None): 유저가 보내려는 msg를 byte의 형태로 직렬화할 함수(callable). 여기서는 변환 후 인코딩
 """
 producer = KafkaProducer(
-    bootstrap_servers=["10.250.93.16:9093"],
+    bootstrap_servers=["localhost:9093"],
     acks=-1,
     compression_type="gzip",
     value_serializer=lambda x: x.encode("utf-8"),
