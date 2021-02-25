@@ -6,10 +6,10 @@ class DataBase:
 
     def get_cursor(self):
         self.DB = pymysql.connect(
-            user='root',
-            passwd='recognize12!@',
+            user='userId',
+            passwd='userPwd',
             host='127.0.0.1',
-            db='devcamp',
+            db='dbName',
             charset='utf8'
         )
         return self.DB.cursor(pymysql.cursors.DictCursor)
