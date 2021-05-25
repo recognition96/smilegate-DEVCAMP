@@ -7,7 +7,7 @@
 5. 기존의 클러스터 구성에 영향을 주지 않고 일정한 서버의 확장성을 지원
 
 ## Producer(accumulator + sender)
-> ![zookeeper-tree](./producer-archi.png)
+> ![zookeeper-tree](./zookeeper-tree.png)
 1. 파라미터
 - 카프카 서버 성능에 크게 영향을 미치는 요인은 acks, retries, batch.size
 - `acks=all`
