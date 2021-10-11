@@ -12,6 +12,7 @@ TweeTrend
 ## 사용 언어 및 프레임워크
 ### 개인 프로젝트
 - Python (Flask)
+- HTML, CSS, Javascript(jQuery)
 - mysql
 ### 팀 프로젝트
 - Python
